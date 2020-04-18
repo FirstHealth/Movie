@@ -60,6 +60,7 @@
                 android:src="@mipmap/group"
                 android:id="@+id/group"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 android:layout_marginRight="@dimen/dp54"
                 android:layout_alignRight="@id/pass">
             </ImageView>
@@ -70,6 +71,7 @@
                 android:layout_alignRight="@id/pass"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp30"
+                android:visibility="gone"
                 android:id="@+id/yanjing">
             </ImageView>
         </RelativeLayout>

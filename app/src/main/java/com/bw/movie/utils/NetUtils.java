@@ -101,7 +101,7 @@ public class NetUtils {
                 Request build = request.newBuilder()
                         .addHeader("userId", userid)
                         .addHeader("sessionId", sessionid)
-                        .addHeader("ak",versionCode)
+                        .addHeader("ak","0110010010000")
                         .addHeader("Content-Type","application/x-www-form-urlencoded")
                         .build();
                 return chain.proceed(build);

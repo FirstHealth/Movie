@@ -1,12 +1,18 @@
 package com.bw.movie.utils;
 
 import com.bw.movie.bean.EmailBean;
+import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.LoginBean;
 import com.bw.movie.bean.RegistBean;
+import com.bw.movie.bean.ReleaseingMovie;
+import com.bw.movie.bean.UpcomingBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * @ClassName Apis
@@ -22,4 +28,17 @@ public interface Apis {
     @POST("user/v2/sendOutEmailCode")
     @FormUrlEncoded
     Observable<EmailBean> doEmail(@Field("email")String email);
+
+    @POST("user/v2/login")
+    @FormUrlEncoded
+    Observable<LoginBean> doLogin(@Field("email")String email,@Field("pwd")String pwd);
+
+    @GET("movie/v2/findHotMovieList")
+    Observable<HotMovie> doHot(@Query("page") int page,@Query("count") int count);
+
+    @GET("movie/v2/findReleaseMovieList")
+    Observable<ReleaseingMovie> doReleaseing(@Query("page") int page,@Query("count") int count);
+
+    @GET("movie/v2/findComingSoonMovieList")
+    Observable<UpcomingBean> doUpcoming(@Query("page") int page,@Query("count") int count);
 }
