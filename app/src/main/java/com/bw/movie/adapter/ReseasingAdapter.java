@@ -1,10 +1,13 @@
 package com.bw.movie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
+import com.bw.movie.activity.MovieInfoActivity;
 import com.bw.movie.bean.ReleaseingMovie;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -43,11 +48,21 @@ public class ReseasingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder)holder).name.setText(list.get(position).getName());
-        String date = new SimpleDateFormat("MM月dd日").format(
-                new java.util.Date(list.get(position).getReleaseTime()));
-        ((ViewHolder)holder).time.setText(date+"上映");
-        ((ViewHolder)holder).count.setText(list.get(position).getWantSeeNum()+"人想看");
-        Glide.with(context).load(list.get(position).getImageUrl()).into(((ViewHolder)holder).iv);
+//        String date = new SimpleDateFormat("MM月dd日").format(
+//                new java.util.Date(list.get(position).getReleaseTime()));
+        ((ViewHolder)holder).time.setText("01月28日"+"上映");
+        ((ViewHolder)holder).count.setText("2563人想看");
+        Uri uri = Uri.parse(list.get(position).getImageUrl());
+        ((ViewHolder)holder).iv.setImageURI(uri);
+
+        ((ViewHolder)holder).ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieInfoActivity.class);
+                intent.putExtra("movieid",list.get(position).getMovieId()+"");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -57,11 +72,12 @@ public class ReseasingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private final ImageView iv;
+        private final SimpleDraweeView iv;
         private final TextView name;
         private final TextView time;
         private final TextView count;
         private final Button bu;
+        private final LinearLayout ll;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +86,7 @@ public class ReseasingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             time = itemView.findViewById(R.id.time);
             count = itemView.findViewById(R.id.count);
             bu = itemView.findViewById(R.id.yue);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 }

@@ -37,6 +37,7 @@
                 android:layout_width="@dimen/dp38"
                 android:layout_height="@dimen/dp22"
                 android:src="@mipmap/icon_search"
+                android:id="@+id/search"
                 android:layout_marginTop="@dimen/dp22"
                 android:layout_marginLeft="@dimen/dp214">
             </ImageView>
@@ -75,6 +76,7 @@
                 android:textSize="@dimen/sp16"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center"
+                android:id="@+id/up"
                 android:layout_marginLeft="@dimen/dp165">
             </TextView>
         </LinearLayout>
@@ -111,6 +113,7 @@
                 android:textSize="@dimen/sp16"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center"
+                android:id="@+id/resa"
                 android:layout_marginLeft="@dimen/dp165">
             </TextView>
         </LinearLayout>
@@ -147,6 +150,7 @@
                 android:textSize="@dimen/sp16"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center"
+                android:id="@+id/hot"
                 android:layout_marginLeft="@dimen/dp165">
             </TextView>
         </LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/dark">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp30"
+            android:layout_marginTop="@dimen/dp30"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="@dimen/dp250"
+                android:layout_height="@dimen/dp30"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp50"
+                android:background="@drawable/itemback"
+                android:id="@+id/et">
+            </EditText>
+            <ImageView
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp5"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp30"
+                android:src="@mipmap/icon_search"
+                android:id="@+id/search">
+            </ImageView>
+        </RelativeLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="@color/dark_blue_grey"
+            app:tabTextColor="@android:color/white"
+            android:id="@+id/tab">
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/vp"
+            android:layout_weight="1">
+        </androidx.viewpager.widget.ViewPager>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

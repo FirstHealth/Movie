@@ -1,7 +1,9 @@
 package com.bw.movie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
+import com.bw.movie.activity.MovieInfoActivity;
 import com.bw.movie.bean.UpcomingBean;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +52,8 @@ public class UpCommingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         beans.clear();
         ((ViewHolder)holder).name.setText(list.get(0).getName());
         ((ViewHolder)holder).count.setText(list.get(0).getScore()+"分");
-        Glide.with(context).load(list.get(position).getImageUrl()).into(((ViewHolder)holder).iv);
+        Uri uri = Uri.parse(list.get(position).getImageUrl());
+        ((ViewHolder)holder).iv.setImageURI(uri);
 
         for (int i = 1; i < list.size(); i++){
             beans.add(list.get(i));
@@ -60,6 +65,15 @@ public class UpCommingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((ViewHolder)holder).rv.setAdapter(adapter);
         ((ViewHolder)holder).rv.addItemDecoration(new SpaceItemDecoration(10));
 
+        ((ViewHolder)holder).iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieInfoActivity.class);
+                intent.putExtra("movieid",list.get(position).getMovieId()+"");
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -69,7 +83,7 @@ public class UpCommingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private final ImageView iv;
+        private final SimpleDraweeView iv;
         private final TextView name;
         private final TextView count;
         private final Button bu;

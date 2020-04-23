@@ -3,6 +3,8 @@ package com.bw.movie.utils;
 import com.bw.movie.bean.EmailBean;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.LoginBean;
+import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.QueryByKeyBean;
 import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
 import com.bw.movie.bean.UpcomingBean;
@@ -11,6 +13,7 @@ import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -41,4 +44,11 @@ public interface Apis {
 
     @GET("movie/v2/findComingSoonMovieList")
     Observable<UpcomingBean> doUpcoming(@Query("page") int page,@Query("count") int count);
+
+    @GET("movie/v2/findMovieByKeyword")
+    Observable<QueryByKeyBean> doQuery(@Query("keyword") String keyword,@Query("page") int page,@Query("count") int count);
+
+    //查询电影详情
+    @GET("movie/v2/findMoviesDetail")
+    Observable<MovieDataBean> movieData(@Query("movieId")int movieId);
 }

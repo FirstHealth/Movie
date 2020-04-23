@@ -88,9 +88,16 @@ public class HomePageActivity extends BaseActivity {
         setTabStyle();
 
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @SuppressLint({"WrongConstant", "ResourceAsColor"})
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                if (tab != null) {
+                    View view = tab.getCustomView();
+                    view.setBackgroundColor(Color.WHITE);
+                    ((TextView) view.findViewById(R.id.tv)).setVisibility(0);//设置一下文字颜色
+                    ((TextView) view.findViewById(R.id.tv)).setTextColor(R.color.colormeimei);
+                    tab.setCustomView(view);
+                }
             }
 
             @SuppressLint({"ResourceAsColor", "WrongConstant"})
@@ -107,13 +114,7 @@ public class HomePageActivity extends BaseActivity {
             @SuppressLint({"WrongConstant", "ResourceAsColor"})
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                if (tab != null) {
-                    View view = tab.getCustomView();
-                    view.setBackgroundColor(Color.WHITE);
-                    ((TextView) view.findViewById(R.id.tv)).setVisibility(0);//设置一下文字颜色
-                    ((TextView) view.findViewById(R.id.tv)).setTextColor(R.color.colormeimei);
-                    tab.setCustomView(view);
-                }
+
             }
         });
 
@@ -154,9 +155,7 @@ public class HomePageActivity extends BaseActivity {
                 ((ImageView) view.findViewById(R.id.iv)).setImageResource(ivs.get(i));
                 //第一个默认为选择样式
                 if(i == 0) {
-                    //将第一个Tab标题颜色设为蓝色
                     ((TextView) view.findViewById(R.id.tv)).setTextColor(getResources().getColor(R.color.colormeimei));
-                    //将第一个Tab图标设为蓝色
                     ((ImageView) view.findViewById(R.id.iv)).setImageResource(ivs.get(i));
                 }else {
                     //将其他Tab图标设为灰色

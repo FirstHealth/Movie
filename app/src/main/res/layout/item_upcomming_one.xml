@@ -4,13 +4,18 @@
     android:gravity="center"
     android:layout_height="match_parent">
 
-    <ImageView
+<!--    <ImageView-->
+<!--        android:layout_width="312dp"-->
+<!--        android:layout_height="@dimen/dp120"-->
+<!--        android:src="@mipmap/ic_launcher"-->
+<!--        android:id="@+id/iv"-->
+<!--        android:scaleType="centerCrop">-->
+<!--    </ImageView>-->
+    <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="312dp"
         android:layout_height="@dimen/dp120"
-        android:src="@mipmap/ic_launcher"
-        android:id="@+id/iv"
-        android:scaleType="centerCrop">
-    </ImageView>
+        android:id="@+id/iv">
+    </com.facebook.drawee.view.SimpleDraweeView>
     <TextView
         android:layout_width="@dimen/dp70"
         android:layout_height="@dimen/dp20"

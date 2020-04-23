@@ -1,13 +1,22 @@
 package com.bw.movie.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
+import com.bw.movie.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -128,5 +137,39 @@ public class NetUtils {
         }
 
         return builder.build();
+    }
+
+    public void scaleImageView(final View rootView, Context context, float scaleSzie, Bitmap bp) {
+
+        Matrix matrix = new Matrix();
+        // float scaleSzie = ((float)
+        // getWindowManager().getDefaultDisplay().getWidth() - 20) /
+        // bp.getWidth();
+
+        matrix.postScale(scaleSzie, scaleSzie);
+
+        Bitmap newBitmap = Bitmap.createBitmap(bp, 0, 0, bp.getWidth(), bp.getHeight(), matrix, true);
+
+        // final View rootView = getRootView();
+
+        final LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout
+                .setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout.setGravity(Gravity.CENTER);
+        linearLayout.setBackgroundColor(context.getResources().getColor(R.color.dark));
+        ImageView imageView = new ImageView(context);
+        imageView.setImageBitmap(newBitmap);
+        linearLayout.addView(imageView);
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                ((ViewGroup) rootView).removeView(linearLayout);
+            }
+        });
+        ((ViewGroup) rootView).addView(linearLayout);
     }
 }

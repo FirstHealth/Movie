@@ -57,7 +57,9 @@
             android:value="7e0f8efc94f4fc48ca547f862bd6923e"/>
 
         <service android:name="com.amap.api.location.APSService"></service>
-
+        <activity android:name=".activity.MovieListActivity"></activity>
+        <activity android:name=".activity.QueryByKeyActivity"></activity>
+        <activity android:name=".activity.MovieInfoActivity"></activity>
     </application>
 
 </manifest>

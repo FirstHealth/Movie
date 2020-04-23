@@ -1,5 +1,6 @@
 package com.bw.movie.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.amap.api.maps2d.MapView;
 import com.amap.api.maps2d.UiSettings;
 import com.amap.api.maps2d.model.LatLng;
 import com.bw.movie.R;
+import com.bw.movie.activity.MovieListActivity;
 import com.bw.movie.adapter.HotAdapter;
 import com.bw.movie.adapter.ReseasingAdapter;
 import com.bw.movie.adapter.UpCommingAdapter;
@@ -41,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @ClassName MovieFragment
@@ -59,6 +62,12 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
     RecyclerView rv3;
     @BindView(R.id.city)
     TextView city;
+    @BindView(R.id.up)
+    TextView up;
+    @BindView(R.id.resa)
+    TextView resa;
+    @BindView(R.id.hot)
+    TextView hot;
     //AMap是地图对象
     private AMap aMap;
     private MapView mapView;
@@ -289,5 +298,32 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
         mLocationClient.setLocationOption(mLocationOption);
         //启动定位
         mLocationClient.startLocation();
+    }
+
+    @OnClick(R.id.search)
+    public void onClick(View view){
+        Intent intent = new Intent(getActivity(), MovieListActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick({R.id.up,R.id.resa,R.id.hot})
+    public void onc(View v){
+        switch (v.getId()){
+            case R.id.up:
+                Intent intent = new Intent(getActivity(), MovieListActivity.class);
+                intent.putExtra("x","0");
+                startActivity(intent);
+                break;
+            case R.id.resa:
+                Intent intentt = new Intent(getActivity(), MovieListActivity.class);
+                intentt.putExtra("x","1");
+                startActivity(intentt);
+                break;
+            case R.id.hot:
+                Intent intenttt = new Intent(getActivity(), MovieListActivity.class);
+                intenttt.putExtra("x","2");
+                startActivity(intenttt);
+                break;
+        }
     }
 }

@@ -12,7 +12,7 @@ public class ReleaseingMovie {
 
 
     /**
-     * result : [{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/dzd6qmwj/dzd6qmwj1.jpg","movieId":16,"name":"碟中谍6：全面瓦解","releaseTime":1600704000000,"wantSeeNum":55,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/jmyx/jmyx1.jpg","movieId":14,"name":"解码游戏","releaseTime":1599062400000,"wantSeeNum":39,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/aqgy/aqgy1.jpg","movieId":15,"name":"爱情公寓","releaseTime":1596988800000,"wantSeeNum":26,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/xhssf/xhssf1.jpg","movieId":3,"name":"西虹市首富","releaseTime":1595779200000,"wantSeeNum":11,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/mtyj/mtyj1.jpg","movieId":2,"name":"摩天营救","releaseTime":1595174400000,"wantSeeNum":5,"whetherReserve":2}]
+     * result : [{"director":"刘阔","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/fyz/fyz1.jpg","movieId":12,"name":"风语咒","score":9.7,"starring":"路知行,阎萌萌,褚珺"},{"director":"乔·德特杜巴","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/jcs/jcs1.jpg","movieId":11,"name":"巨齿鲨","score":9.6,"starring":"杰森·斯坦森,李冰冰,雷恩·威尔森"},{"director":"韩延","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/dwsj/dwsj1.jpg","movieId":10,"name":"动物世界","score":9.5,"starring":"李易峰,迈克尔·道格拉斯,周冬雨"},{"director":"是枝裕和","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/xtjz/xtjz1.jpg","movieId":9,"name":"小偷家族","score":9.4,"starring":"中川雅也,安藤樱,松冈茉优,"},{"director":"胡安·安东尼奥·巴亚纳","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/zljgy/zljgy1.jpg","movieId":8,"name":"侏罗纪世界2","score":9.3,"starring":"克里斯·帕拉特,布莱丝·达拉斯·霍华德,泰德·拉文"}]
      * message : 查询成功
      * status : 0000
      */
@@ -47,20 +47,28 @@ public class ReleaseingMovie {
 
     public static class ResultBean {
         /**
-         * imageUrl : http://mobile.bwstudent.com/images/movie/stills/dzd6qmwj/dzd6qmwj1.jpg
-         * movieId : 16
-         * name : 碟中谍6：全面瓦解
-         * releaseTime : 1600704000000
-         * wantSeeNum : 55
-         * whetherReserve : 2
+         * director : 刘阔
+         * imageUrl : http://mobile.bwstudent.com/images/movie/stills/fyz/fyz1.jpg
+         * movieId : 12
+         * name : 风语咒
+         * score : 9.7
+         * starring : 路知行,阎萌萌,褚珺
          */
 
+        private String director;
         private String imageUrl;
         private int movieId;
         private String name;
-        private long releaseTime;
-        private int wantSeeNum;
-        private int whetherReserve;
+        private double score;
+        private String starring;
+
+        public String getDirector() {
+            return director;
+        }
+
+        public void setDirector(String director) {
+            this.director = director;
+        }
 
         public String getImageUrl() {
             return imageUrl;
@@ -86,28 +94,20 @@ public class ReleaseingMovie {
             this.name = name;
         }
 
-        public long getReleaseTime() {
-            return releaseTime;
+        public double getScore() {
+            return score;
         }
 
-        public void setReleaseTime(long releaseTime) {
-            this.releaseTime = releaseTime;
+        public void setScore(double score) {
+            this.score = score;
         }
 
-        public int getWantSeeNum() {
-            return wantSeeNum;
+        public String getStarring() {
+            return starring;
         }
 
-        public void setWantSeeNum(int wantSeeNum) {
-            this.wantSeeNum = wantSeeNum;
-        }
-
-        public int getWhetherReserve() {
-            return whetherReserve;
-        }
-
-        public void setWhetherReserve(int whetherReserve) {
-            this.whetherReserve = whetherReserve;
+        public void setStarring(String starring) {
+            this.starring = starring;
         }
     }
 }

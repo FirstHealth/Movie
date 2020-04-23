@@ -1,11 +1,14 @@
 package com.bw.movie.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
+import com.bw.movie.activity.MovieInfoActivity;
 import com.bw.movie.bean.HotMovie;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
@@ -43,7 +48,17 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).name.setText(list.get(position).getName());
-        Glide.with(context).load(list.get(position).getImageUrl()).into(((ViewHolder) holder).iv);
+        Uri uri = Uri.parse(list.get(position).getImageUrl());
+        ((ViewHolder)holder).iv.setImageURI(uri);
+
+        ((ViewHolder)holder).ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MovieInfoActivity.class);
+                intent.putExtra("movieid",list.get(position).getMovieId()+"");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -53,15 +68,17 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final ImageView iv;
+        private final SimpleDraweeView iv;
         private final TextView name;
         private final Button bu;
+        private final LinearLayout ll;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
             name = itemView.findViewById(R.id.tv);
             bu = itemView.findViewById(R.id.buy);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 }

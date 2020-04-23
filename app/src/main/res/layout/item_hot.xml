@@ -3,15 +3,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:gravity="center"
     android:background="@color/dark"
+    android:id="@+id/ll"
     android:layout_height="match_parent">
 
-    <ImageView
+<!--    <ImageView-->
+<!--        android:layout_width="@dimen/dp100"-->
+<!--        android:layout_height="@dimen/dp130"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:id="@+id/iv"-->
+<!--        android:src="@mipmap/ic_launcher">-->
+<!--    </ImageView>-->
+    <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="@dimen/dp100"
         android:layout_height="@dimen/dp130"
-        android:scaleType="centerCrop"
-        android:id="@+id/iv"
-        android:src="@mipmap/ic_launcher">
-    </ImageView>
+        android:id="@+id/iv">
+    </com.facebook.drawee.view.SimpleDraweeView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp17"

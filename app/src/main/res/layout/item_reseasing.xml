@@ -3,16 +3,15 @@
     android:orientation="horizontal"
     android:gravity="center"
     android:background="@color/dark_blue_grey"
+    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:layout_width="@dimen/dp88"
         android:layout_height="@dimen/dp108"
-        android:src="@mipmap/ic_launcher"
-        android:scaleType="centerCrop"
         android:id="@+id/iv">
-    </ImageView>
+    </com.facebook.drawee.view.SimpleDraweeView>
     <LinearLayout
         android:layout_width="@dimen/dp220"
         android:layout_height="@dimen/dp95"
@@ -60,7 +59,7 @@
                 android:layout_marginTop="@dimen/dp5"
                 android:background="@drawable/buyback"
                 android:text="预约"
-                android:layout_marginLeft="@dimen/dp100"
+                android:layout_marginLeft="@dimen/dp70"
                 android:textSize="@dimen/sp12"
                 android:textColor="@android:color/white">
             </Button>
