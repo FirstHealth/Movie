@@ -1,5 +1,6 @@
 package com.bw.movie.fragment;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class IntroduceFragment extends BaseFragment {
     TextView yansize;
     @BindView(R.id.rv1)
     RecyclerView rv1;
+    MovieDataBean.ResultBean bean1 = new MovieDataBean.ResultBean();
     @Override
     protected int getReasuce() {
         return R.layout.item_introduce;
@@ -58,6 +60,10 @@ public class IntroduceFragment extends BaseFragment {
         if (!EventBus.getDefault().isRegistered(this)){
             EventBus.getDefault().register(this);
         }
+        if (bean1.getName() != null) {
+            Log.i("xxx", bean1.getName());
+        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)

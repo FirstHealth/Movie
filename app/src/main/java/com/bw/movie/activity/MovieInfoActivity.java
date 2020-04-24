@@ -113,7 +113,7 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
         vp.setAdapter(fragmentViewPager);
         tab.setupWithViewPager(vp);
 
-
+        vp.setOffscreenPageLimit(4);
 
     }
 
