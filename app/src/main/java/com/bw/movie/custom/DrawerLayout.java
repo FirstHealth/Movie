@@ -165,11 +165,29 @@ public class DrawerLayout extends RelativeLayout {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event)
     {
-        boolean isConsumed = false;
+//        boolean isConsumed = false;
+//        switch (event.getActionMasked())
+//        {
+//            case MotionEvent.ACTION_DOWN :
+//                isConsumed = processDown(event);
+//                break;
+//            case MotionEvent.ACTION_MOVE :
+//                processMove(event);
+//                break;
+//            case MotionEvent.ACTION_UP :
+//                processUp(event);
+//                break;
+//        }
+
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked())
         {
             case MotionEvent.ACTION_DOWN :
-                isConsumed = processDown(event);
+                processDown(event);
                 break;
             case MotionEvent.ACTION_MOVE :
                 processMove(event);
@@ -178,14 +196,13 @@ public class DrawerLayout extends RelativeLayout {
                 processUp(event);
                 break;
         }
-
-        return isConsumed || super.dispatchTouchEvent(event);
+        return true;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev)
     {
-        return isDragging;
+        return super.onInterceptTouchEvent(ev);
     }
 
     private void init(Context context, AttributeSet attrs)

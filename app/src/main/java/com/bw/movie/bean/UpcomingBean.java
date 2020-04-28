@@ -12,7 +12,7 @@ public class UpcomingBean {
 
 
     /**
-     * result : [{"director":"\r\n刘伟强","horizontalImage":"http://mobile.bwstudent.com/images/movie/stills/zgjz/zgjz1_h.jpg","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/zgjz/zgjz1.jpg","movieId":24,"name":"中国机长","score":9.4,"starring":"张涵予,欧豪,袁泉,张天爱,李沁"},{"director":"曾国祥","horizontalImage":"http://mobile.bwstudent.com/images/movie/stills/sndn/sndn1_h.jpg","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/sndn/sndn1.jpg","movieId":22,"name":"少年的你","score":9.5,"starring":"周冬雨,易烊千玺,张耀,周也,尹昉"},{"director":"陈凯歌","horizontalImage":"http://mobile.bwstudent.com/images/movie/stills/whwdzg/whwdzg1_h.jpg","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/whwdzg/whwdzg1.jpg","movieId":23,"name":"我和我的祖国","score":9.7,"starring":"黄渤,张译,杜江,葛优,刘昊然,吴京"},{"director":"吕乐","horizontalImage":"http://mobile.bwstudent.com/images/movie/stills/zdn/zdn1_h.jpg","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/zdn/zdn1.jpg","movieId":21,"name":"找到你","score":8.5,"starring":"姚晨,马伊琍,袁文康,吴昊宸"},{"director":"庄文强","horizontalImage":"http://mobile.bwstudent.com/images/movie/stills/ws/ws1_h.jpg","imageUrl":"http://mobile.bwstudent.com/images/movie/stills/ws/ws1.jpg","movieId":20,"name":"无双","score":8.6,"starring":"周润发,郭富城,张静初,冯文娟,廖启智"}]
+     * result : [{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/dzd6qmwj/dzd6qmwj1.jpg","movieId":16,"name":"碟中谍6：全面瓦解","releaseTime":1600704000000,"wantSeeNum":62,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/jmyx/jmyx1.jpg","movieId":14,"name":"解码游戏","releaseTime":1599062400000,"wantSeeNum":45,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/aqgy/aqgy1.jpg","movieId":15,"name":"爱情公寓","releaseTime":1596988800000,"wantSeeNum":32,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/xhssf/xhssf1.jpg","movieId":3,"name":"西虹市首富","releaseTime":1595779200000,"wantSeeNum":19,"whetherReserve":2},{"imageUrl":"http://mobile.bwstudent.com/images/movie/stills/mtyj/mtyj1.jpg","movieId":2,"name":"摩天营救","releaseTime":1595174400000,"wantSeeNum":9,"whetherReserve":2}]
      * message : 查询成功
      * status : 0000
      */
@@ -47,39 +47,20 @@ public class UpcomingBean {
 
     public static class ResultBean {
         /**
-         * director :
-         刘伟强
-         * horizontalImage : http://mobile.bwstudent.com/images/movie/stills/zgjz/zgjz1_h.jpg
-         * imageUrl : http://mobile.bwstudent.com/images/movie/stills/zgjz/zgjz1.jpg
-         * movieId : 24
-         * name : 中国机长
-         * score : 9.4
-         * starring : 张涵予,欧豪,袁泉,张天爱,李沁
+         * imageUrl : http://mobile.bwstudent.com/images/movie/stills/dzd6qmwj/dzd6qmwj1.jpg
+         * movieId : 16
+         * name : 碟中谍6：全面瓦解
+         * releaseTime : 1600704000000
+         * wantSeeNum : 62
+         * whetherReserve : 2
          */
 
-        private String director;
-        private String horizontalImage;
         private String imageUrl;
         private int movieId;
         private String name;
-        private double score;
-        private String starring;
-
-        public String getDirector() {
-            return director;
-        }
-
-        public void setDirector(String director) {
-            this.director = director;
-        }
-
-        public String getHorizontalImage() {
-            return horizontalImage;
-        }
-
-        public void setHorizontalImage(String horizontalImage) {
-            this.horizontalImage = horizontalImage;
-        }
+        private long releaseTime;
+        private int wantSeeNum;
+        private int whetherReserve;
 
         public String getImageUrl() {
             return imageUrl;
@@ -105,20 +86,28 @@ public class UpcomingBean {
             this.name = name;
         }
 
-        public double getScore() {
-            return score;
+        public long getReleaseTime() {
+            return releaseTime;
         }
 
-        public void setScore(double score) {
-            this.score = score;
+        public void setReleaseTime(long releaseTime) {
+            this.releaseTime = releaseTime;
         }
 
-        public String getStarring() {
-            return starring;
+        public int getWantSeeNum() {
+            return wantSeeNum;
         }
 
-        public void setStarring(String starring) {
-            this.starring = starring;
+        public void setWantSeeNum(int wantSeeNum) {
+            this.wantSeeNum = wantSeeNum;
+        }
+
+        public int getWhetherReserve() {
+            return whetherReserve;
+        }
+
+        public void setWhetherReserve(int whetherReserve) {
+            this.whetherReserve = whetherReserve;
         }
     }
 }

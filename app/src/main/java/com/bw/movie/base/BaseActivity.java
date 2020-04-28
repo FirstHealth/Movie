@@ -2,6 +2,7 @@ package com.bw.movie.base;
 
 import android.os.Bundle;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import butterknife.ButterKnife;

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +17,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
+import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
+import com.bw.movie.utils.NetUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @ClassName ReseasingAdapter
@@ -50,8 +58,7 @@ public class ReseasingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         ((ViewHolder)holder).name.setText(list.get(position).getName());
 //        String date = new SimpleDateFormat("MM月dd日").format(
 //                new java.util.Date(list.get(position).getReleaseTime()));
-        ((ViewHolder)holder).time.setText("01月28日"+"上映");
-        ((ViewHolder)holder).count.setText("2563人想看");
+        ((ViewHolder)holder).time.setText("评分"+list.get(position).getScore());
         Uri uri = Uri.parse(list.get(position).getImageUrl());
         ((ViewHolder)holder).iv.setImageURI(uri);
 

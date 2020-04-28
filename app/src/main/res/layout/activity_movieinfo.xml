@@ -105,7 +105,7 @@
             android:text="写影评"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp18"
-            android:id="@+id/weite">
+            android:id="@+id/bu_write1">
         </Button>
         <Button
             android:layout_width="0dp"
@@ -179,7 +179,7 @@
                     <Button
                         android:layout_width="150dp"
                         android:layout_height="60dp"
-                        android:id="@+id/bt_Comment1"
+                        android:id="@+id/bu_write2"
                         android:text="写影评"
                         android:layout_weight="0"
                         android:textSize="14sp"

@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:background="@color/dark"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/dark">
+        <com.amap.api.maps2d.MapView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/map"
+            android:visibility="gone">
+        </com.amap.api.maps2d.MapView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp80"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/dp38"
+                android:layout_marginTop="@dimen/dp22"
+                android:layout_height="@dimen/dp26"
+                android:layout_marginLeft="@dimen/dp20"
+                android:src="@mipmap/icon_location">
+            </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="北京"
+                android:id="@+id/city"
+                android:layout_marginTop="@dimen/dp24"
+                android:textColor="@android:color/white">
+            </TextView>
+            <ImageView
+                android:layout_width="@dimen/dp38"
+                android:layout_height="@dimen/dp22"
+                android:src="@mipmap/icon_search"
+                android:id="@+id/search"
+                android:layout_marginTop="@dimen/dp22"
+                android:layout_marginLeft="@dimen/dp214">
+            </ImageView>
+        </LinearLayout>
 
-</LinearLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:id="@+id/tab">
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/vp">
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+</ScrollView>

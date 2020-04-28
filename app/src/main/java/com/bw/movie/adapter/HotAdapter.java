@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,9 +19,16 @@ import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
 import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.RegistBean;
+import com.bw.movie.utils.NetUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @ClassName HotAdapter
@@ -59,6 +67,7 @@ public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 context.startActivity(intent);
             }
         });
+
     }
 
     @Override

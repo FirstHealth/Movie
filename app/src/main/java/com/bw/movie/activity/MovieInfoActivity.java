@@ -1,6 +1,8 @@
 package com.bw.movie.activity;
 
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.bw.movie.R;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.RegistBean;
 import com.bw.movie.contract.MovieInContract;
 import com.bw.movie.fragment.CinecismFragment;
 import com.bw.movie.fragment.HeraldFragment;
@@ -27,11 +30,13 @@ import com.bw.movie.presenter.MovieInPresenter;
 import com.google.android.material.tabs.TabLayout;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @ClassName MovieInfoActivity
@@ -42,6 +47,7 @@ import butterknife.BindView;
 public class MovieInfoActivity extends BaseActivity implements MovieInContract.IView {
 
     private String movieid;
+
     @BindView(R.id.iv)
     ImageView iv;
     @BindView(R.id.tv1)
@@ -64,8 +70,14 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
     TabLayout tab;
     @BindView(R.id.vp)
     ViewPager vp;
+    @BindView(R.id.bu_write1)
+    Button bu1;
+    @BindView(R.id.bu_write2)
+    Button bu2;
     ArrayList<String> tabs = new ArrayList<>();
     ArrayList<Fragment> list = new ArrayList<>();
+    private MovieDataBean.ResultBean result;
+
     @Override
     protected int getReasuce() {
         return R.layout.activity_movieinfo;
@@ -86,11 +98,10 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
         Intent intent = getIntent();
         movieid = intent.getStringExtra("movieid");
         Toast.makeText(this, ""+ movieid, Toast.LENGTH_SHORT).show();
-
-        BasePresenter presenter = getPresenter();
-        if (presenter instanceof MovieInPresenter){
-            ((MovieInPresenter) presenter).getData(Integer.valueOf(movieid));
-        }
+            BasePresenter presenter = getPresenter();
+            if (presenter instanceof MovieInPresenter) {
+                ((MovieInPresenter) presenter).getData(Integer.valueOf(movieid));
+            }
 
         tabs.add("介绍");
         tabs.add("预告");
@@ -115,22 +126,29 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
 
         vp.setOffscreenPageLimit(4);
 
+
     }
 
     @Override
     public void onSuccess(MovieDataBean bean) {
-        MovieDataBean.ResultBean result = bean.getResult();
-
+        result = bean.getResult();
+        if (result.getWhetherFollow() == 1){
+            heart.setImageResource(R.mipmap.emptyheart);
+            guan.setText("已关注");
+        }else {
+            heart.setImageResource(R.mipmap.xxxxxx);
+            guan.setText("未关注");
+        }
         Glide.with(this).load(result.getImageUrl()).into(iv);
-        tv1.setText("评分："+result.getScore()+"分");
-        tv2.setText("评论："+result.getCommentNum()+"万");
+        tv1.setText("评分："+ result.getScore()+"分");
+        tv2.setText("评论："+ result.getCommentNum()+"万");
 
         name.setText(result.getName());
-        time.setText(result.getMovieType()+"   "+result.getDuration());
+        time.setText(result.getMovieType()+"   "+ result.getDuration());
         long releaseTime = result.getReleaseTime();
                 String date = new SimpleDateFormat("yy--MM--dd").format(
                 new java.util.Date(releaseTime));
-        di.setText("20"+date+"  "+result.getPlaceOrigin()+"上映");
+        di.setText("20"+date+"  "+ result.getPlaceOrigin()+"上映");
 
         names.setText(result.getName());
 
@@ -140,6 +158,24 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
 
     @Override
     public void onError(String str) {
+
+    }
+
+    @Override
+    public void onGuanSuccess(RegistBean bean) {
+    }
+
+    @Override
+    public void onGuanError(String str) {
+
+    }
+
+    @Override
+    public void onQuGuanSuccess(RegistBean bean) {
+    }
+
+    @Override
+    public void onQuGuanError(String str) {
 
     }
 
@@ -165,4 +201,48 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
             return tabs.get(position);
         }
     }
+
+    @OnClick(R.id.heart)
+    public void onClick(View view){
+        int whetherFollow = result.getWhetherFollow();
+        if (whetherFollow == 2){
+            Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
+            heart.setImageResource(R.mipmap.emptyheart);
+            guan.setText("已关注");
+            BasePresenter presenter1 = getPresenter();
+            if (presenter1 instanceof MovieInPresenter){
+                ((MovieInPresenter) presenter1).getGuanData(Integer.valueOf(movieid));
+            }
+
+        }
+        if (whetherFollow == 1){
+            heart.setImageResource(R.mipmap.xxxxxx);
+            guan.setText("未关注");
+            BasePresenter presenter2 = getPresenter();
+            if (presenter2 instanceof MovieInPresenter){
+                ((MovieInPresenter) presenter2).getQuGuanData(Integer.valueOf(movieid));
+            }
+        }
+    }
+
+    @OnClick({R.id.bu_write1,R.id.bu_write2})
+    public void getd(View view){
+        switch (view.getId()){
+            case R.id.bu_write1:
+                String s = name.getText().toString();
+                Intent intent = new Intent(this, WritePingLunActivity.class);
+                intent.putExtra("id",movieid+"");
+                intent.putExtra("name",s+"");
+                startActivity(intent);
+                break;
+            case R.id.bu_write2:
+                String s1 = name.getText().toString();
+                Intent intent1 = new Intent(this, WritePingLunActivity.class);
+                intent1.putExtra("id",movieid+"");
+                intent1.putExtra("name",s1+"");
+                startActivity(intent1);
+                break;
+        }
+    }
+
 }

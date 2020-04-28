@@ -48,12 +48,11 @@ public class UpComming2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder)holder).name.setText(list.get(position).getName());
-        if (list.get(position).getDirector() != null) {
-            ((ViewHolder) holder).time.setText("导演：" + list.get(position).getDirector());
+        if (false) {
+            ((ViewHolder) holder).time.setText("导演：");
         }else {
             ((ViewHolder) holder).time.setText("导演：王晶");
         }
-        ((ViewHolder)holder).count.setText("评分："+list.get(position).getScore());
         Uri uri = Uri.parse(list.get(position).getImageUrl());
         ((ViewHolder)holder).iv.setImageURI(uri);
 

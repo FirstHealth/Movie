@@ -33,6 +33,7 @@ public class HotMoviePresenter extends BasePresenter implements HotMovieContract
                 BaseView view = getView();
                 if (view instanceof HotMovieContract.IView){
                     ((HotMovieContract.IView) view).onHotSuccess(bean);
+
                 }
             }
 

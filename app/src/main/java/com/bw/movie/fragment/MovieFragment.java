@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -81,6 +82,7 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
     private boolean isFirstLoc = true;
     ArrayList<Integer> list = new ArrayList<>();
     private String city1;
+
 
     @Override
     protected int getReasuce() {
@@ -239,7 +241,7 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
                 Log.e("AmapError", "location Error, ErrCode:"
                         + aMapLocation.getErrorCode() + ", errInfo:"
                         + aMapLocation.getErrorInfo());
-                Toast.makeText(getContext(), "定位失败", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), "定位失败", Toast.LENGTH_LONG).show();
             }
         }
     }

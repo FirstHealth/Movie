@@ -47,7 +47,6 @@
                 android:layout_height="@dimen/dp20"
                 android:layout_marginLeft="@dimen/dp20"
                 android:layout_marginTop="@dimen/dp15"
-                android:text="xxxxx"
                 android:textColor="@android:color/white">
             </TextView>
 
@@ -58,7 +57,7 @@
                 android:paddingTop="@dimen/dp5"
                 android:layout_marginTop="@dimen/dp5"
                 android:background="@drawable/buyback"
-                android:text="预约"
+                android:text="购票"
                 android:layout_marginLeft="@dimen/dp70"
                 android:textSize="@dimen/sp12"
                 android:textColor="@android:color/white">

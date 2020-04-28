@@ -60,6 +60,7 @@
         <activity android:name=".activity.MovieListActivity"></activity>
         <activity android:name=".activity.QueryByKeyActivity"></activity>
         <activity android:name=".activity.MovieInfoActivity"></activity>
+        <activity android:name=".activity.WritePingLunActivity"></activity>
     </application>
 
 </manifest>

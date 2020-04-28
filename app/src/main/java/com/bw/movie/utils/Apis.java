@@ -3,6 +3,7 @@ package com.bw.movie.utils;
 import com.bw.movie.bean.EmailBean;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.LoginBean;
+import com.bw.movie.bean.MovieCinecisnBean;
 import com.bw.movie.bean.MovieDataBean;
 import com.bw.movie.bean.QueryByKeyBean;
 import com.bw.movie.bean.RegistBean;
@@ -51,4 +52,22 @@ public interface Apis {
     //查询电影详情
     @GET("movie/v2/findMoviesDetail")
     Observable<MovieDataBean> movieData(@Query("movieId")int movieId);
+
+    @GET("movie/v1/verify/followMovie")
+    Observable<RegistBean> doGuan(@Query("movieId")int movieId);
+
+    @GET("movie/v1/verify/cancelFollowMovie")
+    Observable<RegistBean> doQuGuan(@Query("movieId") int movieId);
+
+    //根据电影的id查询电影评论
+    @GET("movie/v2/findAllMovieComment")
+    Observable<MovieCinecisnBean> moviecomment(@Query("movieId")int movieId, @Query("page")int page, @Query("count")int count);
+
+    @POST("movie/v2/verify/reserve")
+    @FormUrlEncoded
+    Observable<RegistBean> doYuYue(@Field("movieId")int movid);
+
+    @POST("movie/v1/verify/movieComment")
+    @FormUrlEncoded
+    Observable<RegistBean> doWritePing(@Field("movieId")int movieId,@Field("commentContent")String commentContent,@Field("score")double score);
 }

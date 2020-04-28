@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +18,17 @@ import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
 import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.utils.NetUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @ClassName HotAdapter
@@ -47,16 +55,50 @@ public class UpComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (list.get(position).getWhetherReserve() == 1){
+            ((ViewHolder) holder).bu.setText("已预约");
+        }else if (list.get(position).getWhetherReserve() == 2){
+            ((ViewHolder) holder).bu.setText("预约");
+        }
         ((ViewHolder) holder).name.setText(list.get(position).getName());
         Uri uri = Uri.parse(list.get(position).getImageUrl());
         ((ViewHolder) holder).iv.setImageURI(uri);
-
+        //((ViewHolder)holder).count.setText(list.get(position).getWantSeeNum()+"人想看");
         ((ViewHolder)holder).ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MovieInfoActivity.class);
                 intent.putExtra("movieid",list.get(position).getMovieId()+"");
                 context.startActivity(intent);
+            }
+        });
+        ((ViewHolder)holder).bu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NetUtils.getInstance().getApis().doYuYue(list.get(position).getMovieId())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<RegistBean>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(RegistBean bean) {
+                                ((ViewHolder)holder).bu.setText("已预约");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Toast.makeText(context, "预约失败", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
             }
         });
     }
