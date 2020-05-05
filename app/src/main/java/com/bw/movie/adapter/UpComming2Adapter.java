@@ -6,18 +6,15 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
-import com.bw.movie.bean.ReleaseingMovie;
-import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.upcoming.ResultBean_upcoming;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -30,9 +27,9 @@ import java.util.List;
  */
 public class UpComming2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<UpcomingBean.ResultBean> list;
+    List<ResultBean_upcoming> list;
 
-    public UpComming2Adapter(Context context, List<UpcomingBean.ResultBean> list) {
+    public UpComming2Adapter(Context context, List<ResultBean_upcoming> list) {
         this.context = context;
         this.list = list;
     }

@@ -11,6 +11,7 @@ import com.bw.movie.adapter.Hot2Adapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.hot.ResultBean_hot;
 import com.bw.movie.contract.HotMovieContract;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -30,7 +31,7 @@ public class HotMovieFragment extends BaseFragment implements HotMovieContract.I
     @BindView(R.id.rv)
     XRecyclerView rv;
     int a = 1;
-    ArrayList<HotMovie.ResultBean> list = new ArrayList();
+    ArrayList<ResultBean_hot> list = new ArrayList();
     @Override
     protected int getReasuce() {
         return R.layout.fragment_hotmovie;
@@ -71,7 +72,7 @@ public class HotMovieFragment extends BaseFragment implements HotMovieContract.I
 
     @Override
     public void onHotSuccess(HotMovie bean) {
-        List<HotMovie.ResultBean> result = bean.getResult();
+        List<ResultBean_hot> result = bean.getResult();
         if (result != null) {
             list.addAll(result);
         }

@@ -6,29 +6,18 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
-import com.bw.movie.bean.RegistBean;
-import com.bw.movie.bean.ReleaseingMovie;
-import com.bw.movie.utils.NetUtils;
+import com.bw.movie.bean.reselea.ResultBean_reselea;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @ClassName ReseasingAdapter
@@ -38,9 +27,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ReseasingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<ReleaseingMovie.ResultBean> list;
+    List<ResultBean_reselea> list;
 
-    public ReseasingAdapter(Context context, List<ReleaseingMovie.ResultBean> list) {
+    public ReseasingAdapter(Context context, List<ResultBean_reselea> list) {
         this.context = context;
         this.list = list;
     }

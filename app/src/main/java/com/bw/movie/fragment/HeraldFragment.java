@@ -11,6 +11,8 @@ import com.bw.movie.adapter.VideoAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.movieinfo.ResultBean_movieinfo;
+import com.bw.movie.bean.movieinfo.ShortFilmListBean;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -52,8 +54,8 @@ public class HeraldFragment extends BaseFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void getData(MovieDataBean.ResultBean bean){
-        List<MovieDataBean.ResultBean.ShortFilmListBean> shortFilmList = bean.getShortFilmList();
+    public void getData(ResultBean_movieinfo bean){
+        List<ShortFilmListBean> shortFilmList = bean.getShortFilmList();
         Log.i("xxx",bean.getName()+"妹妹");
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(manager);

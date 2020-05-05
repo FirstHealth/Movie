@@ -1,32 +1,33 @@
 package com.bw.movie.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
-import com.bw.movie.bean.MovieDataBean;
-import com.bw.movie.bean.movieinfo.MovieDirectorBean;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bw.movie.bean.AreaBean1;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 /**
- * @ClassName YanAdapter
+ * @ClassName LeftAdapter
  * @Description TODO
  * @Author tys
- * @Date 2020/4/240:25
+ * @Date 2020/5/523:09
  */
-public class YanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class LeftAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<MovieDirectorBean> list;
+    List<AreaBean1.ResultBean> list;
 
-    public YanAdapter(Context context, List<MovieDirectorBean> list) {
+    public LeftAdapter(Context context, List<AreaBean1.ResultBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -34,17 +35,21 @@ public class YanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_yanyuan, null);
+        View view = View.inflate(context, R.layout.item_tv, null);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).tv.setText(list.get(position).getName());
-        String photo = list.get(position).getPhoto();
-        Uri uri = Uri.parse(photo);
-        ((ViewHolder)holder).iv.setImageURI(uri);
+        //Toast.makeText(context, ""+list.get(position).getRegionName(), Toast.LENGTH_SHORT).show();
+        ((ViewHolder)holder).tv.setText(list.get(position).getRegionName());
+        ((ViewHolder)holder).ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(list.get(position));
+            }
+        });
     }
 
     @Override
@@ -55,12 +60,12 @@ public class YanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private final TextView tv;
-        private final SimpleDraweeView iv;
+        private final LinearLayout ll;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            iv = itemView.findViewById(R.id.iv);
             tv = itemView.findViewById(R.id.tv);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 }

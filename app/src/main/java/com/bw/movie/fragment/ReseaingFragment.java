@@ -3,17 +3,16 @@ package com.bw.movie.fragment;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
 import com.bw.movie.adapter.Reseasing2Adapter;
-import com.bw.movie.adapter.ReseasingAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.ReleaseingMovie;
+import com.bw.movie.bean.reselea.ResultBean_reselea;
 import com.bw.movie.contract.ReseaingContract;
 import com.bw.movie.presenter.ReseaingPresenter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -32,7 +31,7 @@ import butterknife.BindView;
 public class ReseaingFragment extends BaseFragment implements ReseaingContract.IView {
     @BindView(R.id.rv)
     XRecyclerView rv;
-    ArrayList<ReleaseingMovie.ResultBean> list = new ArrayList();
+    ArrayList<ResultBean_reselea> list = new ArrayList();
     int a = 1;
     @Override
     protected int getReasuce() {
@@ -74,7 +73,7 @@ public class ReseaingFragment extends BaseFragment implements ReseaingContract.I
 
     @Override
     public void onReleaseingSuccess(ReleaseingMovie bean) {
-        List<ReleaseingMovie.ResultBean> result = bean.getResult();
+        List<ResultBean_reselea> result = bean.getResult();
         if (result != null) {
             list.addAll(result);
         }

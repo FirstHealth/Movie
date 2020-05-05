@@ -33,7 +33,15 @@ import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.ReleaseingMovie;
 import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.hot.ResultBean_hot;
+import com.bw.movie.bean.reselea.ResultBean_reselea;
+import com.bw.movie.bean.upcoming.ResultBean_upcoming;
 import com.bw.movie.contract.MovieContract;
+import com.bw.movie.dao.DaoMaster;
+import com.bw.movie.dao.DaoSession;
+import com.bw.movie.dao.ResultBean_hotDao;
+import com.bw.movie.dao.ResultBean_reseleaDao;
+import com.bw.movie.dao.ResultBean_upcomingDao;
 import com.bw.movie.presenter.MoviePresenter;
 import com.bw.movie.utils.NetUtils;
 import com.stx.xhb.xbanner.XBanner;
@@ -82,6 +90,9 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
     private boolean isFirstLoc = true;
     ArrayList<Integer> list = new ArrayList<>();
     private String city1;
+    private ResultBean_hotDao resultBean_hotDao;
+    private ResultBean_reseleaDao resultBean_reseleaDao;
+    private ResultBean_upcomingDao resultBean_upcomingDao;
 
 
     @Override
@@ -112,6 +123,14 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
 
     @Override
     protected void getData() {
+
+        DaoSession daoSession_hot = DaoMaster.newDevSession(getContext(), "hot");
+        resultBean_hotDao = daoSession_hot.getResultBean_hotDao();
+        DaoSession daoSession_reseles = DaoMaster.newDevSession(getContext(), "reseles");
+        resultBean_reseleaDao = daoSession_reseles.getResultBean_reseleaDao();
+        DaoSession daoSession_upcoming = DaoMaster.newDevSession(getContext(), "upcoming");
+        resultBean_upcomingDao = daoSession_upcoming.getResultBean_upcomingDao();
+
         if (city1 != null){
             city.setText(city1+"");
         }
@@ -138,18 +157,38 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
             }
         }else {
             Toast.makeText(getContext(), "请检查网络", Toast.LENGTH_SHORT).show();
+            List<ResultBean_hot> list1 = resultBean_hotDao.queryBuilder().list();
+            HotMovie hotMovie = new HotMovie();
+            hotMovie.setResult(list1);
+            onHotSuccess(hotMovie);
+
+            List<ResultBean_reselea> list2 = resultBean_reseleaDao.queryBuilder().list();
+            ReleaseingMovie releaseingMovie = new ReleaseingMovie();
+            releaseingMovie.setResult(list2);
+            onReleaseingSuccess(releaseingMovie);
+
+            List<ResultBean_upcoming> list3 = resultBean_upcomingDao.queryBuilder().list();
+            UpcomingBean upcomingBean = new UpcomingBean();
+            upcomingBean.setResult(list3);
+            onUpcommingSuccess(upcomingBean);
+
         }
 
     }
 
     @Override
     public void onHotSuccess(HotMovie bean) {
-        List<HotMovie.ResultBean> result = bean.getResult();
+        List<ResultBean_hot> result = bean.getResult();
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(manager);
         HotAdapter hotAdapter = new HotAdapter(getContext(), result);
         rv.setAdapter(hotAdapter);
         rv.addItemDecoration(new SpaceItemDecoration(10));
+
+        for (int i = 0; i< result.size(); i++){
+            resultBean_hotDao.insertOrReplace(result.get(i));
+        }
+
     }
 
     @Override
@@ -159,12 +198,17 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
 
     @Override
     public void onReleaseingSuccess(ReleaseingMovie bean) {
-        List<ReleaseingMovie.ResultBean> result = bean.getResult();
+        List<ResultBean_reselea> result = bean.getResult();
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv2.setLayoutManager(manager);
         ReseasingAdapter reseasingAdapter = new ReseasingAdapter(getContext(), result);
         rv2.setAdapter(reseasingAdapter);
         rv2.addItemDecoration(new SpaceItemDecoration(10));
+
+        for (int i = 0; i < result.size(); i++){
+            resultBean_reseleaDao.insertOrReplace(result.get(i));
+        }
+
     }
 
     @Override
@@ -174,12 +218,17 @@ public class MovieFragment extends BaseFragment implements MovieContract.IView ,
 
     @Override
     public void onUpcommingSuccess(UpcomingBean bean) {
-        List<UpcomingBean.ResultBean> result = bean.getResult();
+        List<ResultBean_upcoming> result = bean.getResult();
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv3.setLayoutManager(manager);
         UpCommingAdapter commingAdapter = new UpCommingAdapter(getContext(), result);
         rv3.setAdapter(commingAdapter);
         rv3.addItemDecoration(new SpaceItemDecoration(20));
+
+        for (int i = 0; i < result.size(); i++){
+            resultBean_upcomingDao.insertOrReplace(result.get(i));
+        }
+
     }
 
     @Override

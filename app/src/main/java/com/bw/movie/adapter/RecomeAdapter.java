@@ -1,32 +1,31 @@
 package com.bw.movie.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.bw.movie.R;
-import com.bw.movie.bean.MovieDataBean;
-import com.bw.movie.bean.movieinfo.MovieDirectorBean;
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bw.movie.bean.RecomeBean;
 
 import java.util.List;
 
 /**
- * @ClassName YanAdapter
+ * @ClassName RecomeAdapter
  * @Description TODO
  * @Author tys
- * @Date 2020/4/240:25
+ * @Date 2020/5/522:05
  */
-public class YanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<MovieDirectorBean> list;
+    List<RecomeBean.ResultBean> list;
 
-    public YanAdapter(Context context, List<MovieDirectorBean> list) {
+    public RecomeAdapter(Context context, List<RecomeBean.ResultBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -34,17 +33,16 @@ public class YanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(context, R.layout.item_yanyuan, null);
+        View view = View.inflate(context, R.layout.item_recome, null);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).tv.setText(list.get(position).getName());
-        String photo = list.get(position).getPhoto();
-        Uri uri = Uri.parse(photo);
-        ((ViewHolder)holder).iv.setImageURI(uri);
+        ((ViewHolder)holder).address.setText(list.get(position).getAddress());
+        ((ViewHolder)holder).name.setText(list.get(position).getName());
+        Glide.with(context).load(list.get(position).getLogo()).into(((ViewHolder)holder).iv);
     }
 
     @Override
@@ -54,13 +52,15 @@ public class YanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private final TextView tv;
-        private final SimpleDraweeView iv;
+        private final ImageView iv;
+        private final TextView name;
+        private final TextView address;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
-            tv = itemView.findViewById(R.id.tv);
+            name = itemView.findViewById(R.id.name);
+            address = itemView.findViewById(R.id.address);
         }
     }
 }

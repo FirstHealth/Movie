@@ -1,11 +1,15 @@
 package com.bw.movie.utils;
 
+import com.bw.movie.bean.AreaBean1;
 import com.bw.movie.bean.EmailBean;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.LoginBean;
 import com.bw.movie.bean.MovieCinecisnBean;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.NearBean;
+import com.bw.movie.bean.NearBean2;
 import com.bw.movie.bean.QueryByKeyBean;
+import com.bw.movie.bean.RecomeBean;
 import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
 import com.bw.movie.bean.UpcomingBean;
@@ -70,4 +74,16 @@ public interface Apis {
     @POST("movie/v1/verify/movieComment")
     @FormUrlEncoded
     Observable<RegistBean> doWritePing(@Field("movieId")int movieId,@Field("commentContent")String commentContent,@Field("score")double score);
+
+    @GET("cinema/v1/findRecommendCinemas")
+    Observable<RecomeBean> doRecome(@Query("page")int page,@Query("count")int count);
+
+    @GET("cinema/v1/findNearbyCinemas")
+    Observable<NearBean> doNear(@Query("longitude")String la,@Query("latitude")String laa,@Query("page")int page,@Query("count")int count);
+
+    @GET("tool/v2/findRegionList")
+    Observable<AreaBean1> doAreaOne();
+
+    @GET("cinema/v2/findCinemaByRegion")
+    Observable<NearBean2> doNear2(@Query("regionId")int regionId);
 }

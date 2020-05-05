@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.movieinfo.MovieActorBean;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -23,9 +24,9 @@ import java.util.List;
  */
 public class YuanAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<MovieDataBean.ResultBean.MovieActorBean> list;
+    List<MovieActorBean> list;
 
-    public YuanAdapter(Context context, List<MovieDataBean.ResultBean.MovieActorBean> list) {
+    public YuanAdapter(Context context, List<MovieActorBean> list) {
         this.context = context;
         this.list = list;
     }

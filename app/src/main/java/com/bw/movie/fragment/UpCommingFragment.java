@@ -11,6 +11,7 @@ import com.bw.movie.adapter.UpComming2Adapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.upcoming.ResultBean_upcoming;
 import com.bw.movie.contract.UpcommingContract;
 import com.bw.movie.presenter.UpcommingPresenter;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -29,7 +30,7 @@ import butterknife.BindView;
 public class UpCommingFragment extends BaseFragment implements UpcommingContract.IView {
     @BindView(R.id.rv)
     XRecyclerView rv;
-    ArrayList<UpcomingBean.ResultBean> list = new ArrayList();
+    ArrayList<ResultBean_upcoming> list = new ArrayList();
     int a = 1;
     @Override
     protected int getReasuce() {
@@ -71,7 +72,7 @@ public class UpCommingFragment extends BaseFragment implements UpcommingContract
 
     @Override
     public void onUpcommingSuccess(UpcomingBean bean) {
-        List<UpcomingBean.ResultBean> result = bean.getResult();
+        List<ResultBean_upcoming> result = bean.getResult();
         if (result != null){
             list.addAll(result);
         }

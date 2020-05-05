@@ -6,18 +6,15 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
-import com.bw.movie.bean.HotMovie;
-import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.hot.ResultBean_hot;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -30,9 +27,9 @@ import java.util.List;
  */
 public class Hot2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<HotMovie.ResultBean> list;
+    List<ResultBean_hot> list;
 
-    public Hot2Adapter(Context context, List<HotMovie.ResultBean> list) {
+    public Hot2Adapter(Context context, List<ResultBean_hot> list) {
         this.context = context;
         this.list = list;
     }

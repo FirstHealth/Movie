@@ -12,6 +12,7 @@ import com.bw.movie.adapter.JuZhaoAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.movieinfo.ResultBean_movieinfo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -53,7 +54,7 @@ public class StillFragment extends BaseFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void getData(MovieDataBean.ResultBean bean){
+    public void getData(ResultBean_movieinfo bean){
         List<String> posterList = bean.getPosterList();
 
         GridLayoutManager manager = new GridLayoutManager(getContext(), 3);

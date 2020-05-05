@@ -2,33 +2,22 @@ package com.bw.movie.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
-import com.bw.movie.bean.HotMovie;
-import com.bw.movie.bean.RegistBean;
-import com.bw.movie.utils.NetUtils;
+import com.bw.movie.bean.hot.ResultBean_hot;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * @ClassName HotAdapter
@@ -38,9 +27,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class HotAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<HotMovie.ResultBean> list;
+    List<ResultBean_hot> list;
 
-    public HotAdapter(Context context, List<HotMovie.ResultBean> list) {
+    public HotAdapter(Context context, List<ResultBean_hot> list) {
         this.context = context;
         this.list = list;
     }

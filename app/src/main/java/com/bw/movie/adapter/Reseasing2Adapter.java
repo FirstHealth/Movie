@@ -6,20 +6,17 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
-import com.bw.movie.bean.ReleaseingMovie;
+import com.bw.movie.bean.reselea.ResultBean_reselea;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -30,9 +27,9 @@ import java.util.List;
  */
 public class Reseasing2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<ReleaseingMovie.ResultBean> list;
+    List<ResultBean_reselea> list;
 
-    public Reseasing2Adapter(Context context, List<ReleaseingMovie.ResultBean> list) {
+    public Reseasing2Adapter(Context context, List<ResultBean_reselea> list) {
         this.context = context;
         this.list = list;
     }

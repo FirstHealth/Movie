@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +13,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MovieInfoActivity;
-import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.RegistBean;
-import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.upcoming.ResultBean_upcoming;
 import com.bw.movie.utils.NetUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -38,9 +35,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class UpComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<UpcomingBean.ResultBean> list;
+    List<ResultBean_upcoming> list;
 
-    public UpComAdapter(Context context, List<UpcomingBean.ResultBean> list) {
+    public UpComAdapter(Context context, List<ResultBean_upcoming> list) {
         this.context = context;
         this.list = list;
     }
@@ -72,10 +69,11 @@ public class UpComAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 context.startActivity(intent);
             }
         });
+        int po = new Long(list.get(position).getMovieId()).intValue();
         ((ViewHolder)holder).bu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetUtils.getInstance().getApis().doYuYue(list.get(position).getMovieId())
+                NetUtils.getInstance().getApis().doYuYue(po)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<RegistBean>() {

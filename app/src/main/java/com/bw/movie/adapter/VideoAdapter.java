@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.movieinfo.ShortFilmListBean;
 
 import java.util.List;
 
@@ -23,9 +24,9 @@ import java.util.List;
  */
 public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    List<MovieDataBean.ResultBean.ShortFilmListBean> list;
+    List<ShortFilmListBean> list;
 
-    public VideoAdapter(Context context, List<MovieDataBean.ResultBean.ShortFilmListBean> list) {
+    public VideoAdapter(Context context, List<ShortFilmListBean> list) {
         this.context = context;
         this.list = list;
     }

@@ -24,10 +24,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
 
     private P presenter;
     private Unbinder bind;
-    /**
-     * 控件加载完成的标志
-     */
-    public boolean isChang;
+//    /**
+//     * 控件加载完成的标志
+//     */
+//    public boolean isChang;
     private View view;
 
     @Nullable
@@ -37,8 +37,9 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
         presenter = initPresenter();
         getid(view);
         bind = ButterKnife.bind(this,view);
-        isChang = true;
-        doNetWock();
+//        isChang = true;
+//        doNetWock();
+        getData();
         return view;
     }
 
@@ -109,23 +110,23 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment {
      * 尝试调用网络，先判断是否对用户可见
      * 如果可见，调用抽象方法，让子类去调接口
      */
-    private void doNetWock(){
-        if(getUserVisibleHint()){
-            getData();
-        }
-    }
-    /**
-     * fragment 提供的回调，回调当天fragment是否对用用户可见
-     * 他是在当这个 fragment 是否对用户的可见发生变化的时候
-     * @param isVisibleToUser false对用户不可见， true对用户可见
-     */
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        // 如果还没有加载过数据 && 用户切换到了这个fragment
-        // 那就开始加载数据
-        if(isVisibleToUser&&isChang){
-            getData();
-        }
-    }
+//    private void doNetWock(){
+//        if(getUserVisibleHint()){
+//            getData();
+//        }
+//    }
+//    /**
+//     * fragment 提供的回调，回调当天fragment是否对用用户可见
+//     * 他是在当这个 fragment 是否对用户的可见发生变化的时候
+//     * @param isVisibleToUser false对用户不可见， true对用户可见
+//     */
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        // 如果还没有加载过数据 && 用户切换到了这个fragment
+//        // 那就开始加载数据
+//        if(isVisibleToUser&&isChang){
+//            getData();
+//        }
+//    }
 }

@@ -14,6 +14,7 @@ import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.MovieCinecisnBean;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.movieinfo.ResultBean_movieinfo;
 import com.bw.movie.contract.CinecismContract;
 import com.bw.movie.presenter.CinecismPresenter;
 
@@ -74,8 +75,8 @@ public class CinecismFragment extends BaseFragment implements CinecismContract.I
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void getData(MovieDataBean.ResultBean bean){
-        int movieId = bean.getMovieId();
+    public void getData(ResultBean_movieinfo bean){
+        int movieId = new Long(bean.getMovieId()).intValue();
         BasePresenter presenter = getPresenter();
         if (presenter instanceof CinecismPresenter){
             ((CinecismPresenter) presenter).getData(movieId,1,5);

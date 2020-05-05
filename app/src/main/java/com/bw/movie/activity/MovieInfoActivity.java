@@ -1,6 +1,7 @@
 package com.bw.movie.activity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,12 +22,17 @@ import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.MovieDataBean;
 import com.bw.movie.bean.RegistBean;
+import com.bw.movie.bean.movieinfo.ResultBean_movieinfo;
 import com.bw.movie.contract.MovieInContract;
+import com.bw.movie.dao.DaoMaster;
+import com.bw.movie.dao.DaoSession;
+import com.bw.movie.dao.ResultBean_movieinfoDao;
 import com.bw.movie.fragment.CinecismFragment;
 import com.bw.movie.fragment.HeraldFragment;
 import com.bw.movie.fragment.IntroduceFragment;
 import com.bw.movie.fragment.StillFragment;
 import com.bw.movie.presenter.MovieInPresenter;
+import com.bw.movie.utils.NetUtils;
 import com.google.android.material.tabs.TabLayout;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,6 +40,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -76,7 +83,8 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
     Button bu2;
     ArrayList<String> tabs = new ArrayList<>();
     ArrayList<Fragment> list = new ArrayList<>();
-    private MovieDataBean.ResultBean result;
+    private ResultBean_movieinfo result;
+    private ResultBean_movieinfoDao resultBean_movieinfoDao;
 
     @Override
     protected int getReasuce() {
@@ -95,13 +103,30 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
 
     @Override
     protected void getData() {
+        DaoSession movieinfo = DaoMaster.newDevSession(this, "movieinfo1");
+        resultBean_movieinfoDao = movieinfo.getResultBean_movieinfoDao();
+
         Intent intent = getIntent();
         movieid = intent.getStringExtra("movieid");
         Toast.makeText(this, ""+ movieid, Toast.LENGTH_SHORT).show();
+        if (NetUtils.getInstance().isNetWork(this)) {
             BasePresenter presenter = getPresenter();
             if (presenter instanceof MovieInPresenter) {
                 ((MovieInPresenter) presenter).getData(Integer.valueOf(movieid));
             }
+        }else {
+            int value = new Long(movieid).intValue();
+            Toast.makeText(this, "无网络", Toast.LENGTH_SHORT).show();
+            List<ResultBean_movieinfo> list = resultBean_movieinfoDao.queryBuilder()
+                    .list();
+            for (int i = 0; i < list.size(); i++){
+                if (value == list.get(i).getMovieId()){
+                    MovieDataBean movieDataBean = new MovieDataBean();
+                    movieDataBean.setResult(list.get(i));
+                    onSuccess(movieDataBean);
+                }
+            }
+        }
 
         tabs.add("介绍");
         tabs.add("预告");
@@ -132,6 +157,9 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
     @Override
     public void onSuccess(MovieDataBean bean) {
         result = bean.getResult();
+
+        resultBean_movieinfoDao.insertOrReplaceInTx(result);
+
         if (result.getWhetherFollow() == 1){
             heart.setImageResource(R.mipmap.emptyheart);
             guan.setText("已关注");

@@ -13,6 +13,9 @@ import com.bw.movie.adapter.YuanAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.movieinfo.MovieActorBean;
+import com.bw.movie.bean.movieinfo.MovieDirectorBean;
+import com.bw.movie.bean.movieinfo.ResultBean_movieinfo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -39,7 +42,7 @@ public class IntroduceFragment extends BaseFragment {
     TextView yansize;
     @BindView(R.id.rv1)
     RecyclerView rv1;
-    MovieDataBean.ResultBean bean1 = new MovieDataBean.ResultBean();
+    ResultBean_movieinfo bean1 = new ResultBean_movieinfo();
     @Override
     protected int getReasuce() {
         return R.layout.item_introduce;
@@ -67,17 +70,17 @@ public class IntroduceFragment extends BaseFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void getData(MovieDataBean.ResultBean bean){
+    public void getData(ResultBean_movieinfo bean){
         String summary = bean.getSummary();
         jian.setText(summary);
 
-        List<MovieDataBean.ResultBean.MovieDirectorBean> movieDirector = bean.getMovieDirector();
+        List<MovieDirectorBean> movieDirector = bean.getMovieDirector();
         daosize.setText("导演（"+movieDirector.size()+"）");
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(manager);
         YanAdapter yanAdapter = new YanAdapter(getContext(), movieDirector);
         rv.setAdapter(yanAdapter);
-        List<MovieDataBean.ResultBean.MovieActorBean> movieActor = bean.getMovieActor();
+        List<MovieActorBean> movieActor = bean.getMovieActor();
         yansize.setText("演员（"+movieActor.size()+"）");
         LinearLayoutManager manager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv1.setLayoutManager(manager1);
