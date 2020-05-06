@@ -6,9 +6,12 @@ import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.LoginBean;
 import com.bw.movie.bean.MovieCinecisnBean;
 import com.bw.movie.bean.MovieDataBean;
+import com.bw.movie.bean.MovieTingBean;
 import com.bw.movie.bean.NearBean;
 import com.bw.movie.bean.NearBean2;
 import com.bw.movie.bean.QueryByKeyBean;
+import com.bw.movie.bean.QueryCinemaBean;
+import com.bw.movie.bean.QueryZuoWeiBean;
 import com.bw.movie.bean.RecomeBean;
 import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
@@ -86,4 +89,13 @@ public interface Apis {
 
     @GET("cinema/v2/findCinemaByRegion")
     Observable<NearBean2> doNear2(@Query("regionId")int regionId);
+
+    @GET("movie/v2/findCinemasInfoByRegion")
+    Observable<QueryCinemaBean> doQueryBean(@Query("movieId")int movieId, @Query("regionId")int regionId, @Query("page")int page, @Query("count")int count);
+
+    @GET("movie/v2/findSeatInfo")
+    Observable<QueryZuoWeiBean> doZuoWei(@Query("hallId")int hallId);
+
+    @GET("movie/v2/findMovieSchedule")
+    Observable<MovieTingBean> doTing(@Query("movieId")int movieId,@Query("cinemaId")int cinemaId);
 }

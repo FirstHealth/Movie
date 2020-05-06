@@ -43,7 +43,6 @@ public class RecommendFragment extends BaseFragment {
 
     @Override
     protected void getid(View view) {
-        Toast.makeText(getContext(), "妹妹", Toast.LENGTH_SHORT).show();
         NetUtils.getInstance().getApis().doRecome(1,10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

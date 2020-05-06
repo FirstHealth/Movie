@@ -81,6 +81,8 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
     Button bu1;
     @BindView(R.id.bu_write2)
     Button bu2;
+    @BindView(R.id.bt_buy2)
+    Button buy;
     ArrayList<String> tabs = new ArrayList<>();
     ArrayList<Fragment> list = new ArrayList<>();
     private ResultBean_movieinfo result;
@@ -271,6 +273,18 @@ public class MovieInfoActivity extends BaseActivity implements MovieInContract.I
                 startActivity(intent1);
                 break;
         }
+    }
+
+    @OnClick(R.id.bt_buy2)
+    public void onClic(View view){
+        Intent intent = new Intent(this, SelectCinemaActivity.class);
+        intent.putExtra("id",movieid+"");
+        intent.putExtra("time",result.getDuration()+"");
+        intent.putExtra("score",result.getScore()+"");
+        intent.putExtra("dao",result.getMovieActor().get(0).getName());
+        intent.putExtra("ima",result.getShortFilmList().get(0).getVideoUrl());
+        intent.putExtra("name",result.getName());
+        startActivity(intent);
     }
 
 }

@@ -189,7 +189,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:text="选座购票"
-                        android:id="@+id/bt_butticket1"
+                        android:id="@+id/bt_buy2"
                         android:layout_weight="0"
                         android:textSize="14sp"
                         android:textColor="#fff"

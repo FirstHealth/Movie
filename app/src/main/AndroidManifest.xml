@@ -8,25 +8,22 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
 
     <application
         android:name=".utils.App"
@@ -37,8 +34,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ForgetPasswordActivity"></activity>
-        <activity android:name=".activity.HomePageActivity" >
+        <activity android:name=".activity.SeatActivity"></activity>
+        <activity android:name=".activity.SelectCinemaActivity" />
+        <activity android:name=".activity.ForgetPasswordActivity" />
+        <activity android:name=".activity.HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,22 +46,22 @@
         </activity>
         <activity android:name=".activity.RegistActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.BootpageActivity">
-
-        </activity>
+        <activity android:name=".activity.BootpageActivity" />
         <activity
             android:name=".activity.LoginActivity$WXEntryActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="7e0f8efc94f4fc48ca547f862bd6923e"/>
+            android:value="7e0f8efc94f4fc48ca547f862bd6923e" />
 
-        <service android:name="com.amap.api.location.APSService"></service>
-        <activity android:name=".activity.MovieListActivity"></activity>
-        <activity android:name=".activity.QueryByKeyActivity"></activity>
-        <activity android:name=".activity.MovieInfoActivity"></activity>
-        <activity android:name=".activity.WritePingLunActivity"></activity>
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity android:name=".activity.MovieListActivity" />
+        <activity android:name=".activity.QueryByKeyActivity" />
+        <activity android:name=".activity.MovieInfoActivity" />
+        <activity android:name=".activity.WritePingLunActivity" />
     </application>
 
 </manifest>

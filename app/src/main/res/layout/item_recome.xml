@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:background="@color/dark_blue_grey"
     android:layout_width="match_parent"
+    android:id="@+id/ll"
     android:layout_height="match_parent">
 
     <ImageView
