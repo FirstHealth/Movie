@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
-import com.bw.movie.activity.SeatActivity;
+import com.bw.movie.SeatActivity;
 import com.bw.movie.bean.QueryByKeyBean;
 import com.bw.movie.bean.QueryCinemaBean;
 import com.bw.movie.bean.RecomeBean;

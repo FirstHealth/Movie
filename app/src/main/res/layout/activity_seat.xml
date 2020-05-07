@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/dark"
     tools:context=".activity.SeatActivity">
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -15,19 +13,25 @@
             android:id="@+id/iv"
             android:src="@mipmap/ic_launcher">
         </ImageView>
-            <com.bw.movie.custom.SelectSiteView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/iv"
-                android:id="@+id/sele">
-            </com.bw.movie.custom.SelectSiteView>
+<!--            <com.bw.movie.custom.SelectSiteView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/iv"-->
+<!--                android:id="@+id/sele">-->
+<!--            </com.bw.movie.custom.SelectSiteView>-->
+    <com.bw.movie.custom.SeatTable
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/mSearchView"
+        android:layout_below="@id/iv">
+    </com.bw.movie.custom.SeatTable>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="选择影院和时间"
             android:textColor="@android:color/white"
             android:id="@+id/count"
-            android:layout_below="@id/sele"
+            android:layout_below="@id/mSearchView"
             android:textSize="16sp">
         </TextView>
         <androidx.recyclerview.widget.RecyclerView

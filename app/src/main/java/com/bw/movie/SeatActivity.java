@@ -1,19 +1,16 @@
-package com.bw.movie.activity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.bw.movie;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
-import com.bw.movie.R;
 import com.bw.movie.adapter.MovieTingAdapter;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BasePresenter;
@@ -23,8 +20,6 @@ import com.bw.movie.bean.QueryZuoWeiBean;
 import com.bw.movie.bean.SiteBean;
 import com.bw.movie.bean.XiaDanBean;
 import com.bw.movie.custom.SeatTable;
-import com.bw.movie.custom.SelectSiteView;
-import com.bw.movie.utils.EncryptUtil;
 import com.bw.movie.utils.MD5;
 import com.bw.movie.utils.NetUtils;
 import com.bw.movie.utils.SPUtil;

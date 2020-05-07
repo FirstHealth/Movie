@@ -9,6 +9,7 @@ import com.bw.movie.bean.MovieDataBean;
 import com.bw.movie.bean.MovieTingBean;
 import com.bw.movie.bean.NearBean;
 import com.bw.movie.bean.NearBean2;
+import com.bw.movie.bean.PayBean;
 import com.bw.movie.bean.QueryByKeyBean;
 import com.bw.movie.bean.QueryCinemaBean;
 import com.bw.movie.bean.QueryZuoWeiBean;
@@ -16,6 +17,7 @@ import com.bw.movie.bean.RecomeBean;
 import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
 import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.XiaDanBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -98,4 +100,12 @@ public interface Apis {
 
     @GET("movie/v2/findMovieSchedule")
     Observable<MovieTingBean> doTing(@Query("movieId")int movieId,@Query("cinemaId")int cinemaId);
+
+    @POST("movie/v2/verify/buyMovieTickets")
+    @FormUrlEncoded
+    Observable<XiaDanBean> doXiaDan(@Field("scheduleId")int scheduleId,@Field("seat")String seat,@Field("sign")String sign);
+
+    @POST("movie/v2/verify/pay")
+    @FormUrlEncoded
+    Observable<PayBean> doPay(@Field("payType")int payType,@Field("orderId")String orderId);
 }
