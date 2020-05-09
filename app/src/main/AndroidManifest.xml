@@ -25,6 +25,22 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
     <application
         android:name=".utils.App"
         android:allowBackup="true"
@@ -34,10 +50,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity android:name=".activity.SeatActivity" />
         <activity android:name=".activity.SelectCinemaActivity" />
         <activity android:name=".activity.ForgetPasswordActivity" />
-        <activity android:name=".activity.HomePageActivity"></activity>
+        <activity android:name=".activity.HomePageActivity">
+
+        </activity>
         <activity android:name=".activity.RegistActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
@@ -50,7 +69,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="7e0f8efc94f4fc48ca547f862bd6923e" />
+            android:value="7d35a7259209ecd60ea84321088e660a" />
 
         <service android:name="com.amap.api.location.APSService" />
 
@@ -59,6 +78,24 @@
         <activity android:name=".activity.MovieInfoActivity" />
         <activity android:name=".activity.WritePingLunActivity" />
         <activity android:name=".SeatActivity"></activity>
+        <activity android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wxb3852e6a6b7d9516" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".wxapi.AppRegister"
+            android:permission="com.tencent.mm.plugin.permission.SEND">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+        <activity android:name=".activity.PersonalinformationActivity"></activity>
+        <activity android:name=".activity.MyFocusActivity"></activity>
     </application>
 
 </manifest>

@@ -13,12 +13,6 @@
             android:id="@+id/iv"
             android:src="@mipmap/ic_launcher">
         </ImageView>
-<!--            <com.bw.movie.custom.SelectSiteView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/iv"-->
-<!--                android:id="@+id/sele">-->
-<!--            </com.bw.movie.custom.SelectSiteView>-->
     <com.bw.movie.custom.SeatTable
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -40,14 +34,30 @@
             android:layout_below="@id/count"
             android:id="@+id/rv">
         </androidx.recyclerview.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/dp30"
+            android:layout_weight="1"
             android:background="@color/colormeimei"
-            android:layout_alignParentBottom="true"
             android:text="请选择座位"
             android:id="@+id/bu"
             android:textColor="@android:color/white">
         </Button>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp30"
+            android:layout_weight="1"
+            android:background="@color/colormeimei"
+            android:text="请选择座位"
+            android:id="@+id/buu"
+            android:textColor="@android:color/white">
+        </Button>
+    </LinearLayout>
+
 
 </RelativeLayout>

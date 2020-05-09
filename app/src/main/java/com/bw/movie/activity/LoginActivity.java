@@ -18,6 +18,7 @@ import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.LoginBean;
 import com.bw.movie.contract.LoginContract;
 import com.bw.movie.presenter.LoginPresenter;
+import com.bw.movie.utils.App;
 import com.bw.movie.utils.EncryptUtil;
 import com.bw.movie.utils.NetUtils;
 import com.bw.movie.utils.SPUtil;
@@ -90,6 +91,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
                 }
                 break;
             case R.id.weixin:
+                IWXAPI api = App.getIWXAPI();
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_demo_test";
+                api.sendReq(req);
                 break;
                 default:
         }
@@ -101,7 +107,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
         Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
         SPUtil.putString(this,SPUtil.USERINFO_NAME,SPUtil.USERINFO_KEY_USER_ID,bean.getResult().getUserId()+"");
         SPUtil.putString(this,SPUtil.USERINFO_NAME,SPUtil.USERINFO_KEY_SESSION_ID,bean.getResult().getSessionId());
-
+        SPUtil.putString(this,"mine","head",bean.getResult().getUserInfo().getHeadPic());
+        SPUtil.putString(this,"mine","nick",bean.getResult().getUserInfo().getNickName());
+        SPUtil.putString(this,"mine","phone",bean.getResult().getUserInfo().getPhone());
+        SPUtil.putString(this,"mine","sex",bean.getResult().getUserInfo().getSex()+"");
+        SPUtil.putString(this,"mine","birthday",bean.getResult().getUserInfo().getBirthday()+"");
+        SPUtil.putString(this,"mine","lasetime",bean.getResult().getUserInfo().getLastLoginTime()+"");
+        SPUtil.putString(this,"mine","email",email.getText().toString());
         Intent intent = new Intent(this, HomePageActivity.class);
         startActivity(intent);
         finish();
@@ -112,60 +124,4 @@ public class LoginActivity extends BaseActivity implements LoginContract.IView {
 
     }
 
-//    public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
-//
-//        private static final int RETURN_MSG_TYPE_LOGIN = 1;
-//        private static final int RETURN_MSG_TYPE_SHARE = 2;
-//
-//        @Override
-//        protected void onCreate(@Nullable Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            GlobalApplication.getInstance().iwxapi.handleIntent(getIntent(),WXEntryActivity.this);
-//        }
-//        @Override
-//        public void onReq(BaseReq baseReq) {
-//            switch(baseReq.getType()){
-//                case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
-//                    break;
-//                case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//        @Override
-//        public void onResp(com.tencent.mm.opensdk.modelbase.BaseResp baseResp) {
-//            Toast.makeText(this, "baseresp.getType = " + baseResp.getType(), Toast.LENGTH_SHORT).show();
-//            switch (baseResp.errCode) {
-//            case com.tencent.mm.opensdk.modelbase.BaseResp.ErrCode.ERR_OK:
-//            switch (baseResp.getType()) {
-//                case RETURN_MSG_TYPE_LOGIN:
-////拿到了微信返回的code,立马再去请求access_token
-//                String code = ((SendAuth.Resp) baseResp).code;
-//                    try {
-////获取access_token为http get请求
-//                    String res= OkhttpUtils.getSyncAsString("https://api.weixin.qq.com/sns/oauth2/access_token?appid=AppID&secret=AppSecret&code="+ code +"&grant_type=authorization_code");
-//                    Toast.makeText(this, res, Toast.LENGTH_LONG).show();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                Toast.makeText(this, code, Toast.LENGTH_LONG).show();
-////就在这个地方，用网络库什么的或者自己封的网络api，发请求去咯，注意是get请求
-//                break;
-//                case RETURN_MSG_TYPE_SHARE:
-//                break;
-//            }
-//            break;
-//            case com.tencent.mm.opensdk.modelbase.BaseResp.ErrCode.ERR_USER_CANCEL:
-//            break;
-//            case com.tencent.mm.opensdk.modelbase.BaseResp.ErrCode.ERR_AUTH_DENIED:
-//            break;
-//            case com.tencent.mm.opensdk.modelbase.BaseResp.ErrCode.ERR_UNSUPPORT:
-//            break;
-//            default:
-//            break;
-//}
-//        }
-//
-//    }
 }

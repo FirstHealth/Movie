@@ -2,6 +2,7 @@ package com.bw.movie.utils;
 
 import com.bw.movie.bean.AreaBean1;
 import com.bw.movie.bean.EmailBean;
+import com.bw.movie.bean.FindUserFollowCinemaListBean;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.LoginBean;
 import com.bw.movie.bean.MovieCinecisnBean;
@@ -17,9 +18,14 @@ import com.bw.movie.bean.RecomeBean;
 import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
 import com.bw.movie.bean.UpcomingBean;
+import com.bw.movie.bean.UploadHeadPicBean;
+import com.bw.movie.bean.UserFollowMovieBean;
 import com.bw.movie.bean.XiaDanBean;
+import com.bw.movie.bean.ZFBBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -108,4 +114,23 @@ public interface Apis {
     @POST("movie/v2/verify/pay")
     @FormUrlEncoded
     Observable<PayBean> doPay(@Field("payType")int payType,@Field("orderId")String orderId);
+
+    @POST("movie/v2/verify/pay")
+    @FormUrlEncoded
+    Observable<ZFBBean> doPayZFB(@Field("payType")int payType, @Field("orderId")String orderId);
+
+    //头像上传
+    @POST("user/v1/verify/uploadHeadPic")
+    Observable<UploadHeadPicBean> getUpLoadHeadPicBean(@Header("userId") int userId, @Header("sessionId")String sessionId, @Body RequestBody body);
+
+    //查询用户关注影院列表
+    @GET("user/v2/verify/findUserFollowCinemaList")
+    Observable<FindUserFollowCinemaListBean>  findUserFollowCinemaList(@Header("userId") int userId, @Header("sessionId")String sessionId,
+                                                                       @Query("page")int page, @Query("count")int count);
+
+    //查询用户关注电影列表
+    @GET("user/v2/verify/findUserFollowMovieList")
+    Observable<UserFollowMovieBean> findUserFollowMovieList(@Header("userId") int userId, @Header("sessionId")String sessionId,
+                                                            @Query("page")int page,
+                                                            @Query("count")int count);
 }
