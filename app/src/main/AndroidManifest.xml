@@ -44,9 +44,9 @@
     <application
         android:name=".utils.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/dimei"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/dimei"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -96,6 +96,8 @@
         </receiver>
         <activity android:name=".activity.PersonalinformationActivity"></activity>
         <activity android:name=".activity.MyFocusActivity"></activity>
+        <activity android:name=".activity.CinemaDetailsActivity"></activity>
+        <activity android:name=".activity.ScheduleActivity"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.bean.RecomeBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -43,6 +47,13 @@ public class RecomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         ((ViewHolder)holder).address.setText(list.get(position).getAddress());
         ((ViewHolder)holder).name.setText(list.get(position).getName());
         Glide.with(context).load(list.get(position).getLogo()).into(((ViewHolder)holder).iv);
+        RecomeBean.ResultBean resultBean = list.get(position);
+        ((ViewHolder)holder).ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(list.get(position));
+            }
+        });
     }
 
     @Override
@@ -55,12 +66,14 @@ public class RecomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private final ImageView iv;
         private final TextView name;
         private final TextView address;
+        private final LinearLayout ll;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             iv = itemView.findViewById(R.id.iv);
             name = itemView.findViewById(R.id.name);
             address = itemView.findViewById(R.id.address);
+            ll = itemView.findViewById(R.id.ll);
         }
     }
 }

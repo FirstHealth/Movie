@@ -1,7 +1,10 @@
 package com.bw.movie.utils;
 
 import com.bw.movie.bean.AreaBean1;
+import com.bw.movie.bean.DataListBean;
 import com.bw.movie.bean.EmailBean;
+import com.bw.movie.bean.FindAllCinemaCommentBean;
+import com.bw.movie.bean.FindCinemaInfoBean;
 import com.bw.movie.bean.FindUserFollowCinemaListBean;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.LoginBean;
@@ -17,6 +20,7 @@ import com.bw.movie.bean.QueryZuoWeiBean;
 import com.bw.movie.bean.RecomeBean;
 import com.bw.movie.bean.RegistBean;
 import com.bw.movie.bean.ReleaseingMovie;
+import com.bw.movie.bean.ScheduleBean;
 import com.bw.movie.bean.UpcomingBean;
 import com.bw.movie.bean.UploadHeadPicBean;
 import com.bw.movie.bean.UserFollowMovieBean;
@@ -133,4 +137,32 @@ public interface Apis {
     Observable<UserFollowMovieBean> findUserFollowMovieList(@Header("userId") int userId, @Header("sessionId")String sessionId,
                                                             @Query("page")int page,
                                                             @Query("count")int count);
+
+    //查询电影信息明细
+    @GET("cinema/v1/findCinemaInfo")
+    Observable<FindCinemaInfoBean> findCinemaInfo(@Query("cinemaId")int cinemaId);
+
+    //查询影院用户评论列表
+    @GET("cinema/v1/findAllCinemaComment")
+    Observable<FindAllCinemaCommentBean> findAllCinemaComment(@Query("cinemaId")int cinemaId,
+                                                              @Query("page")int page, @Query("count")int count);
+
+    //影院评论点赞
+    @POST("cinema/v1/verify/cinemaCommentGreat")
+    @FormUrlEncoded
+    Observable<RegistBean> cinemaCommentGreat(@Header("userId") int userId,@Header("sessionId")String sessionId,
+                                                 @Field("commentId") int commentId);
+
+    //关注影院
+    @GET("cinema/v1/verify/followCinema")
+    Observable<RegistBean> followCinema(@Header("userId") int userId,@Header("sessionId")String sessionId,
+                                           @Query("cinemaId")int cinemaId);
+
+    //查询影院下的电影排期
+    @GET("cinema/v2/findCinemaScheduleList")
+    Observable<ScheduleBean>  findCinemaScheduleList(@Query("cinemaId")int cinemaId, @Query("page") int page, @Query("count") int count);
+
+    //查询一周排期的时间
+    @GET("tool/v2/findDateList")
+    Observable<DataListBean> datalist();
 }

@@ -1,5 +1,6 @@
 package com.bw.movie.fragment.cinema;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -8,11 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.CinemaDetailsActivity;
 import com.bw.movie.adapter.RecomeAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.RecomeBean;
 import com.bw.movie.utils.NetUtils;
+import com.bw.movie.utils.SPUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -43,6 +50,15 @@ public class RecommendFragment extends BaseFragment {
 
     @Override
     protected void getid(View view) {
+
+
+    }
+
+    @Override
+    protected void getData() {
+        if (!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
         NetUtils.getInstance().getApis().doRecome(1,10)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -73,8 +89,11 @@ public class RecommendFragment extends BaseFragment {
                 });
     }
 
-    @Override
-    protected void getData() {
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getD(RecomeBean.ResultBean bean){
+        int id = bean.getId();
+        SPUtil.putString(getContext(),"login","cinemaId",id+"");
+        Intent intent = new Intent(getContext(), CinemaDetailsActivity.class);
+        startActivity(intent);
     }
 }

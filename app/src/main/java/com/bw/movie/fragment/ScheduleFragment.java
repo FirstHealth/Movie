@@ -1,6 +1,5 @@
-package com.bw.movie.fragment.cinema;
+package com.bw.movie.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -8,11 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
-import com.bw.movie.adapter.NearAdapter;
+import com.bw.movie.adapter.ScheduleAdaoter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
-import com.bw.movie.bean.NearBean;
+import com.bw.movie.bean.ScheduleBean;
 import com.bw.movie.utils.NetUtils;
+import com.bw.movie.utils.SPUtil;
 
 import java.util.List;
 
@@ -22,20 +22,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * @ClassName RecommendFragment
- * @Description TODO
- * @Author tys
- * @Date 2020/5/521:43
- */
-public class NearbyFragment extends BaseFragment {
+public class ScheduleFragment extends BaseFragment {
     @BindView(R.id.rv)
     RecyclerView rv;
-    @Override
-    protected int getReasuce() {
-        return R.layout.fragment_nearby;
-    }
-
     @Override
     protected BasePresenter initPresenter() {
         return null;
@@ -47,24 +36,29 @@ public class NearbyFragment extends BaseFragment {
     }
 
     @Override
+    protected int getReasuce() {
+        return R.layout.schedulesragment;
+    }
+
+    @Override
     protected void getData() {
-        NetUtils.getInstance().getApis().doNear("116.30551391385724","40.04571807462411",1,10)
+        String cinemaId = SPUtil.getString(getActivity(), "login", "cinemaId");
+        NetUtils.getInstance().getApis().findCinemaScheduleList(Integer.valueOf(cinemaId),1,5)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NearBean>() {
+                .subscribe(new Observer<ScheduleBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(NearBean nearBean) {
-                        List<NearBean.ResultBean> result = nearBean.getResult();
-                        Toast.makeText(getContext(), ""+result.size()+"xx", Toast.LENGTH_SHORT).show();
-                        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-                        rv.setLayoutManager(manager);
-                        NearAdapter adapter = new NearAdapter(getContext(), result);
-                        rv.setAdapter(adapter);
+                    public void onNext(ScheduleBean scheduleBean) {
+                        List<ScheduleBean.ResultBean> result = scheduleBean.getResult();
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+                        rv.setLayoutManager(linearLayoutManager);
+                        ScheduleAdaoter scheduleAdaoter = new ScheduleAdaoter(getActivity(),result);
+                        rv.setAdapter(scheduleAdaoter);
                     }
 
                     @Override
@@ -78,4 +72,7 @@ public class NearbyFragment extends BaseFragment {
                     }
                 });
     }
+
+
+
 }
